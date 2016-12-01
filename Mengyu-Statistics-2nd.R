@@ -1,0 +1,15 @@
+library(dplyr)
+install.packages("tidyr")
+library(tidyr)
+install.packages("lubridate")
+library(lubridate)
+df <- readRDS(df,file="C:/Users/liume/OneDrive/data driven/final project/NYC Bike Share Data.rds")
+df <- separate(df, starttime, c("startdate", "startsec"), sep=" ", remove =FALSE)
+df$startsec <- hm(df$startsec)
+str(df)
+x.lable <- seq(from=0, to=86400, by=3600)
+plot(df$startsec, df$birth.year, xlab="Time", ylab="Age of Rider", col=gray(0.3, alpha = 0.03), pch=19, xaxt="n", yaxt="n")
+axis(side = 1, at=x.lable, labels = 0:24, tick=T)
+axis(side = 2, at=df$birth.year, labels = 2016-df$birth.year, tick=T)
+
+
